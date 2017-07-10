@@ -18,7 +18,7 @@ class FolhaCamaraRepository extends EntityRepository
         $queryBuilder = $this->applyFilters($queryBuilder, $filters);
 
         return [
-            'pages' => count(new Paginator($queryBuilder)),
+            'total' => (new Paginator($queryBuilder))->count(),
             'result' => $queryBuilder->getQuery()->getResult()
         ];
     }
