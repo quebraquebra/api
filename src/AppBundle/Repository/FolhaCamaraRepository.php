@@ -32,13 +32,6 @@ class FolhaCamaraRepository extends EntityRepository
             ;
         }
 
-//        if (!empty($filters['folhaPagamento'])) {
-//            $queryBuilder
-//                ->andWhere($queryBuilder->expr()->like('LOWER(fc.folhaPagamento)', 'LOWER(:folhaPagamento)'))
-//                ->setParameter('folhaPagamento', "%{$filters['folhaPagamento']}%")
-//            ;
-//        }
-
         if (!empty($filters['vinculo'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->like('LOWER(fc.vinculo)', 'LOWER(:vinculo)'))
@@ -67,10 +60,20 @@ class FolhaCamaraRepository extends EntityRepository
             ;
         }
 
-        $queryBuilder->orderBy('fc.nome');
+        $this->setOrderBy($queryBuilder, $filters['order'] ?? '');
         $queryBuilder->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * ($filters['limit'] ?? 10) : 0);
         $queryBuilder->setMaxResults($filters['limit'] ?? 10);
 
+        return $queryBuilder;
+    }
+    
+    private function setOrderBy(QueryBuilder $queryBuilder, string $orderFilter): QueryBuilder
+    {
+        preg_match('/^-?([a-zA-Z]+)$/', $orderFilter, $orderMatches);
+        $sort = $orderMatches[1] ?? 'nome';
+        $order = '-' !== substr($orderFilter, 0, 1) ? 'ASC' : 'DESC';
+        $queryBuilder->orderBy("fc.{$sort}", $order);
+        
         return $queryBuilder;
     }
 }
