@@ -68,7 +68,7 @@ class FolhaCamaraRepository extends EntityRepository
         }
 
         $queryBuilder->orderBy('fc.nome');
-        $queryBuilder->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * 10 : 0);
+        $queryBuilder->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * ($filters['limit'] ?? 10) : 0);
         $queryBuilder->setMaxResults($filters['limit'] ?? 10);
 
         return $queryBuilder;
