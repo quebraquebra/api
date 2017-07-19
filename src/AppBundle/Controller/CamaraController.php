@@ -29,9 +29,9 @@ class CamaraController extends FOSRestController
     {
         $filters = $request->query->getIterator()->getArrayCopy();
 
-        /** @var FolhaCamaraService $remuneracaoService */
-        $remuneracaoService = $this->get('app.folha.camara.service');
-        $remuneracoes = $remuneracaoService->search($filters);
+        /** @var FolhaCamaraService $folhaCamaraService */
+        $folhaCamaraService = $this->get('app.folha.camara.service');
+        $remuneracoes = $folhaCamaraService->search($filters);
 
         /** @var Serializer $serializer */
         $serializer = $this->get('jms_serializer');
