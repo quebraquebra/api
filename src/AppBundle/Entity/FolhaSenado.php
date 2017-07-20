@@ -29,16 +29,16 @@ class FolhaSenado
     private $tipo;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="ano", type="string", nullable=false)
+     * @ORM\Column(name="ano", type="smallint", nullable=false)
      */
     private $ano;
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="mes", type="boolean", nullable=false)
+     * @ORM\Column(name="mes", type="smallint", nullable=false)
      */
     private $mes;
 
@@ -227,17 +227,17 @@ class FolhaSenado
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAno(): string
+    public function getAno(): int
     {
         return $this->ano;
     }
 
     /**
-     * @return boolean
+     * @return int
      */
-    public function isMes(): bool
+    public function getMes(): int
     {
         return $this->mes;
     }
