@@ -11,8 +11,8 @@ class FolhaSenadoRepository extends EntityRepository
     public function search(array $filters = []): array
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
-            ->select('sf')
-            ->from(FolhaSenado::class, 'sf')
+            ->select('fs')
+            ->from(FolhaSenado::class, 'fs')
         ;
         $this->applyFilters($queryBuilder, $filters);
 
@@ -25,32 +25,34 @@ class FolhaSenadoRepository extends EntityRepository
     private function applyFilters(QueryBuilder $queryBuilder, array $filters): QueryBuilder
     {
         if (!empty($filters['servidor'])) {
-            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(sf.servidor)', 'LOWER(:servidor)'))
+            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(fs.servidor)', 'LOWER(:servidor)'))
                 ->setParameter('servidor', "%{$filters['servidor']}%");
         }
 
         if (!empty($filters['vinculo'])) {
-            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(sf.vinculo)', 'LOWER(:vinculo)'))
+            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(fs.vinculo)', 'LOWER(:vinculo)'))
                 ->setParameter('vinculo', "%{$filters['vinculo']}%");
         }
 
         if (!empty($filters['cargo'])) {
-            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(sf.cargo)', 'LOWER(:cargo)'))
+            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(fs.cargo)', 'LOWER(:cargo)'))
                 ->setParameter('cargo', "%{$filters['cargo']}%");
         }
 
         if (!empty($filters['ano'])) {
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('sf.ano', ':ano'))
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('fs.ano', ':ano'))
                 ->setParameter('ano', (int) $filters['ano']);
         }
 
         if (!empty($filters['mes'])) {
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('sf.mes', ':mes'))
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('fs.mes', ':mes'))
                 ->setParameter('mes', (int) $filters['mes']);
         }
 
         $queryBuilder
-            ->orderBy('sf.' . $filters['sort'] ?? 'servidor', $filters['order'] ?? 'ASC')
+            ->orderBy('fs.ano', 'DESC')
+            ->addOrderBy('fs.mes', 'DESC')
+            ->addOrderBy('fs.' . $filters['sort'] ?? 'servidor', $filters['order'] ?? 'ASC')
             ->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * ($filters['limit'] ?? 10) : 0)
             ->setMaxResults($filters['limit'] ?? 10);
 

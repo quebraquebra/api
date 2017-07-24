@@ -50,7 +50,9 @@ class FolhaCamaraRepository extends EntityRepository
         }
 
         $queryBuilder
-            ->orderBy('fc.' . $filters['sort'] ?? 'nome', $filters['order'] ?? 'ASC')
+            ->orderBy('fc.ano', 'DESC')
+            ->addOrderBy('fc.mes', 'DESC')
+            ->addOrderBy('fc.' . $filters['sort'] ?? 'nome', $filters['order'] ?? 'ASC')
             ->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * ($filters['limit'] ?? 10) : 0)
             ->setMaxResults($filters['limit'] ?? 10);
 
