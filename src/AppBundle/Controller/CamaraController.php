@@ -13,8 +13,8 @@ use JMS\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * @NamePrefix("camara_")
- * @Prefix("/camara")
+ * Class CamaraController
+ * @package AppBundle\Controller
  */
 class CamaraController extends FOSRestController
 {
@@ -22,21 +22,29 @@ class CamaraController extends FOSRestController
      * 
      * @param Request $request
      * @return Response
-     *
-     * @Get("/folha")
      */
-    public function getFolhaAction(Request $request): Response
+    public function folhaAction(Request $request): Response
     {
-        $filters = $request->query->getIterator()->getArrayCopy();
+        try {
+            $filters = $request->query->getIterator()->getArrayCopy();
 
-        /** @var FolhaCamaraService $folhaCamaraService */
-        $folhaCamaraService = $this->get('app.folha.camara.service');
-        $remuneracoes = $folhaCamaraService->search($filters);
+            /** @var FolhaCamaraService $folhaCamaraService */
+            $folhaCamaraService = $this->get('app.folha.camara.service');
+            $remuneracoes = $folhaCamaraService->search($filters);
 
-        /** @var Serializer $serializer */
-        $serializer = $this->get('jms_serializer');
-        $json = $serializer->serialize($remuneracoes, 'json');
+            /** @var Serializer $serializer */
+            $serializer = $this->get('jms_serializer');
+            $json = $serializer->serialize($remuneracoes, 'json');
 
-        return new JsonResponse($json, 200, ['Access-Control-Allow-Origin' => '*'], true);
+            $response = new JsonResponse($json, Response::HTTP_OK, ['Access-Control-Allow-Origin' => '*'], true);
+        } catch (\Exception $exception) {
+            $response = new JsonResponse(
+                ['message' => 'Erro durante a solicitação'],
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ['Access-Control-Allow-Origin' => '*']
+            );
+        } finally {
+            return $response;
+        }
     }
 }

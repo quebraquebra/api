@@ -1,3 +1,14 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: rest
+home_index:
+  path: /
+  methods: [GET]
+  defaults: { _controller: AppBundle:Home:index }
+
+camara_folha:
+  path: /camara/folha
+  methods: [GET]
+  defaults: { _controller: AppBundle:Camara:folha }
+
+senado_folha:
+  path: /senado/folha
+  methods: [GET]
+  defaults: { _controller: AppBundle:Senado:folha }
