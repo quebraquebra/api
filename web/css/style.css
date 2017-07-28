@@ -1,0 +1,13 @@
+#main-banner {
+  background: #99fdd9 url("../img/wallpaper.png") no-repeat bottom center;
+  background-size: cover;
+  height: 300px;
+}
+
+#main-banner .logo {
+  display: block;
+  margin: 0 auto;
+  padding: 50px;
+  max-height: 100%;
+  max-width: 100%;
+}
