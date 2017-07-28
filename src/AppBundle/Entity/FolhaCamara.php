@@ -52,9 +52,9 @@ class FolhaCamara
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=255, nullable=false)
+     * @ORM\Column(name="servidor", type="string", length=255, nullable=false)
      */
-    private $nome;
+    private $servidor;
 
     /**
      * @var float
@@ -132,8 +132,8 @@ class FolhaCamara
         return $this->vinculo;
     }
 
-    public function getNome(): string {
-        return $this->nome;
+    public function getServidor(): string {
+        return $this->servidor;
     }
 
     public function getRemuneracaoFixa(): float {
