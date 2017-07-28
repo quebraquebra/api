@@ -36,12 +36,11 @@ class CamaraController extends FOSRestController
             $serializer = $this->get('jms_serializer');
             $json = $serializer->serialize($remuneracoes, 'json');
 
-            $response = new JsonResponse($json, Response::HTTP_OK, ['Access-Control-Allow-Origin' => '*'], true);
+            $response = new JsonResponse($json, Response::HTTP_OK, [], true);
         } catch (\Exception $exception) {
             $response = new JsonResponse(
                 ['message' => 'Erro durante a solicitação'],
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-                ['Access-Control-Allow-Origin' => '*']
+                Response::HTTP_INTERNAL_SERVER_ERROR
             );
         } finally {
             return $response;
