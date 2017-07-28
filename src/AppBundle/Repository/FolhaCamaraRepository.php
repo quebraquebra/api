@@ -6,8 +6,17 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class FolhaCamaraRepository
+ * @package AppBundle\Repository
+ */
 class FolhaCamaraRepository extends EntityRepository
 {
+    /**
+     *
+     * @param array $filters
+     * @return array
+     */
     public function search(array $filters = []): array
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
@@ -22,11 +31,17 @@ class FolhaCamaraRepository extends EntityRepository
         ];
     }
 
+    /**
+     *
+     * @param QueryBuilder $queryBuilder
+     * @param array $filters
+     * @return QueryBuilder
+     */
     private function applyFilters(QueryBuilder $queryBuilder, array $filters): QueryBuilder
     {
-        if (!empty($filters['nome'])) {
-            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(fc.nome)', 'LOWER(:nome)'))
-                ->setParameter('nome', "%{$filters['nome']}%");
+        if (!empty($filters['servidor'])) {
+            $queryBuilder->andWhere($queryBuilder->expr()->like('LOWER(fc.servidor)', 'LOWER(:servidor)'))
+                ->setParameter('servidor', "%{$filters['servidor']}%");
         }
 
         if (!empty($filters['vinculo'])) {
@@ -52,7 +67,7 @@ class FolhaCamaraRepository extends EntityRepository
         $queryBuilder
             ->orderBy('fc.ano', 'DESC')
             ->addOrderBy('fc.mes', 'DESC')
-            ->addOrderBy('fc.' . $filters['sort'] ?? 'nome', $filters['order'] ?? 'ASC')
+            ->addOrderBy('fc.' . ($filters['sort'] ?? 'servidor'), $filters['order'] ?? 'ASC')
             ->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * ($filters['limit'] ?? 10) : 0)
             ->setMaxResults($filters['limit'] ?? 10);
 

@@ -6,8 +6,17 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class FolhaSenadoRepository
+ * @package AppBundle\Repository
+ */
 class FolhaSenadoRepository extends EntityRepository
 {
+    /**
+     *
+     * @param array $filters
+     * @return array
+     */
     public function search(array $filters = []): array
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
@@ -22,6 +31,12 @@ class FolhaSenadoRepository extends EntityRepository
         ];
     }
 
+    /**
+     *
+     * @param QueryBuilder $queryBuilder
+     * @param array $filters
+     * @return QueryBuilder
+     */
     private function applyFilters(QueryBuilder $queryBuilder, array $filters): QueryBuilder
     {
         if (!empty($filters['servidor'])) {
@@ -52,7 +67,7 @@ class FolhaSenadoRepository extends EntityRepository
         $queryBuilder
             ->orderBy('fs.ano', 'DESC')
             ->addOrderBy('fs.mes', 'DESC')
-            ->addOrderBy('fs.' . $filters['sort'] ?? 'servidor', $filters['order'] ?? 'ASC')
+            ->addOrderBy('fs.' . ($filters['sort'] ?? 'servidor'), $filters['order'] ?? 'ASC')
             ->setFirstResult(isset($filters['page']) ? ($filters['page'] - 1) * ($filters['limit'] ?? 10) : 0)
             ->setMaxResults($filters['limit'] ?? 10);
 
