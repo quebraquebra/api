@@ -1,7 +1,27 @@
+body {
+  font-size: 14px;
+}
+
+a:hover { cursor: pointer }
+
+h1 {
+  border-bottom: 3px solid #82d7b9;
+  color:  #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+dt,
+dd { margin-bottom: 10px }
+
+.text-bold { font-weight: bold }
+
 #main-banner {
   background: #99fdd9 url("../img/wallpaper.png") no-repeat bottom center;
   background-size: cover;
+  box-shadow: 0 5px 10px #82d7b9;
   height: 300px;
+  margin-bottom: 20px;
 }
 
 #main-banner .logo {
