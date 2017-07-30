@@ -1,71 +1,101 @@
-QuebraQuebraAPI
-========================
+# QuebraQuebra REST API
 
-Demo: http://api.quebraquebra.fagnerlima.pro.br/camara/folha
+Projeto do **Hackfest contra a Corrupção 2017: Tecnologia, Transparência e Cidadania**.
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+## Recursos Disponíveis na API
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+### Folha da Câmara dos Deputados
 
-What's inside?
---------------
+Link: [api.quebraquebra.lsd.ufcg.edu.br/camara/folha](http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha)
 
-The Symfony Standard Edition is configured with the following defaults:
+#### Dados retornados (formato JSON):
 
-  * An AppBundle you can use to start coding;
+| Atributo | Descrição |
+|-|-|
+| **total** | Total de registros no banco de dados que atendem aos parâmetros da consulta. |
+| **result** | Array de registros de folhas de pagamento.<br/>Atributos da consulta:<br/>- **id**,<br/>- **mes**,<br/>- **ano**,<br/>- **cargo**,<br/>- **vinculo**,<br/>- **servidor**,<br/>- **remuneracaoFixa**,<br/>- **vantagensPessoais**,<br/>- **remuneracaoEventual**,<br/>- **abonoPermanencia**,<br/>- **descontos**,<br/>- **outrosDiarias**,<br/>- **outrosAuxilios**,<br/>- **outrosVantagens**. |
 
-  * Twig as the only configured template engine;
+#### Parâmetros da consulta (via QueryString):
 
-  * Doctrine ORM/DBAL;
+| Parâmetro | Descrição |
+|-|-|
+| **limit** | Limite de registros por página.<br/>__Valor padrão__: **10**. |
+| **page** | Número da página de registros.<br/>__Valor padrão__: **1**. |
+| **ano** | Ano da folha. |
+| **mes** | Mês (valor numérico) da folha. |
+| **servidor** | Nome do servidor. |
+| **vinculo** | Vínculo do servidor junto à Câmara dos Deputados. |
+| **cargo** | Cargo do servidor junto à Câmara dos Deputados. |
+| **sort** | Atributo utilizado para ordenar os registros.<br/>__Valor padrão__: **servidor**.<br/>__Observação__: Se não forem informados **ano** e **mês**, além do valor de **sort**, a consulta também ordenará os registros por **ano** e **mês**, respectivamente. |
+| **order** | Regra de ordenação dos registros.<br/>__Valores possíveis__: **ASC** (ascendente) e **DESC** (decrescente)<br/>__Valor padrão__: **ASC**. |
 
-  * Swiftmailer;
+Exemplo de consulta com parâmetros: [api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc](http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc)
 
-  * Annotations enabled for everything.
+### Folha do Senado Federal
 
-It comes pre-configured with the following bundles:
+Link: [api.quebraquebra.lsd.ufcg.edu.br/senado/folha](http://api.quebraquebra.lsd.ufcg.edu.br/senado/folha)
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+#### Dados retornados (formato JSON):
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+| Atributo | Descrição |
+|-|-|
+| **total** | Total de registros no banco de dados que atendem aos parâmetros da consulta. |
+| **result** | Array de registros de folhas de pagamento.<br/>Atributos da consulta:<br/>- **id**<br/>- **tipo**<br/>- **ano**<br/>- **mes**<br/>- **servidor**<br/>- **anoAdmissao**<br/>- **vinculo**<br/>- **cargo**<br/>- **padrao**<br/>- **especialidade**<br/>- **situacao**<br/>- **remuneracaoBasica**<br/>- **vantagensPessoais**<br/>- **funcaoCargoComissao**<br/>- **gratificacaoNatalina**<br/>- **horasExtras**<br/>- **outrasRemuneracoesEventuais**<br/>- **adicionalPericulosidade**<br/>- **adicionalNoturno**<br/>- **abonoPermanencia**<br/>- **reversaoTetoConstitucional**<br/>- **impostoRenda**<br/>- **psss**<br/>- **faltas**<br/>- **diarias**<br/>- **auxilioAlimentacao**<br/>- **outrasVantagensIndenizatorias**<br/>- **licencaPremio** |
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+#### Parâmetros da consulta (via QueryString):
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+| Parâmetro | Descrição |
+|-|-|
+| **limit** | Limite de registros por página.<br/>__Valor padrão__: **10**. |
+| **page** | Número da página de registros.<br/>__Valor padrão__: **1**. |
+| **ano** | Ano da folha. |
+| **mes** | Mês (valor numérico) da folha. |
+| **servidor** | Nome do servidor. |
+| **vinculo** | Vínculo do servidor junto à Câmara dos Deputados. |
+| **cargo** | Cargo do servidor junto à Câmara dos Deputados. |
+| **sort** | Atributo utilizado para ordenar os registros.<br/>__Valor padrão__: **servidor**.<br/>__Observação__: Se não forem informados **ano** e **mês**, além do valor de **sort**, a consulta também ordenará os registros por **ano** e **mês**, respectivamente. |
+| **order** | Regra de ordenação dos registros.<br/>__Valores possíveis__: **ASC** (ascendente) e **DESC** (decrescente)<br/>__Valor padrão__: **ASC**. |
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+Exemplo de consulta com parâmetros: [api.quebraquebra.lsd.ufcg.edu.br/senado/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc](http://api.quebraquebra.lsd.ufcg.edu.br/senado/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc)
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+## Links Externos
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+**Website Oficial**: [quebraquebra.lsd.ufcg.edu.br](http://quebraquebra.lsd.ufcg.edu.br/)
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+**GitHub**: [github.com/quebraquebra](https://github.com/quebraquebra)
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
+**Facebook**: [facebook.com/quebracamaraquebrasenado](https://www.facebook.com/quebracamaraquebrasenado)
 
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
+## Para os Desenvolvedores
 
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
+### Tecnologias Utilizadas
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+* PHP
+  * [Symfony](https://symfony.com/)
+  * [Doctrine](http://www.doctrine-project.org/)
+  * [Composer](https://getcomposer.org/)
 
-Enjoy!
+### Ambiente de Desenvolvimento
 
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+* Servidor Web com suporte ao PHP (Apache);
+* PHP;
+* Composer;
+* Banco de Dados (MySQL, PostgreSQL, etc.).
+
+### Instruções de Deploy para Desenvolvedores
+
+1. Instale as dependências com o Composer.
+
+```
+composer install
+```
+
+2. No decorrer da instalação das dependências, serão solicitados os dados de acesso ao banco de dados. Após os dados serem informados, o arquivo **app/config/parameters.yml** será criado. Você poderá atualizar esse arquivo sempre que necessário.
+
+3. Para utilização da API, o Symfony conta com um servidor web interno com suporte ao PHP.
+
+```
+bin/console server:run
+```
+
+O servidor web do Symfony roda no endereço [http://localhost:8000](http://localhost:8000).
