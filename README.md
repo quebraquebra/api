@@ -2,6 +2,8 @@
 
 Projeto do **Hackfest contra a Corrupção 2017: Tecnologia, Transparência e Cidadania**.
 
+Acesse: [api.quebraquebra.lsd.ufcg.edu.br](http://api.quebraquebra.lsd.ufcg.edu.br)
+
 ## Recursos Disponíveis na API
 
 ### Folha da Câmara dos Deputados
@@ -82,9 +84,9 @@ Exemplo de consulta com parâmetros: [api.quebraquebra.lsd.ufcg.edu.br/senado/fo
 * Composer;
 * Banco de Dados (MySQL, PostgreSQL, etc.).
 
-### Instruções de Deploy para Desenvolvedores
+### Desenvolvimento
 
-1. Instale as dependências com o Composer.
+1. Instale as dependências com o **Composer**.
 
 ```
 composer install
@@ -92,10 +94,10 @@ composer install
 
 2. No decorrer da instalação das dependências, serão solicitados os dados de acesso ao banco de dados. Após os dados serem informados, o arquivo **app/config/parameters.yml** será criado. Você poderá atualizar esse arquivo sempre que necessário.
 
-3. Para utilização da API, o Symfony conta com um servidor web interno com suporte ao PHP.
+3. Para utilização da API, o **Symfony** conta com um servidor web interno com suporte ao PHP.
 
 ```
 bin/console server:run
 ```
 
-O servidor web do Symfony roda no endereço [http://localhost:8000](http://localhost:8000).
+> O servidor web do **Symfony** roda no endereço [http://localhost:8000](http://localhost:8000).
