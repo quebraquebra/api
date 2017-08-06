@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <title>{% block title %}QuebraQuebra API{% endblock %}</title>
+        <title>QuebraQuebra API | {% block title %}{% endblock %}</title>
         <meta name="author" content="Fagner Lima">
         <meta name="description" content="QuebraQuebra API | Hackfest contra a Corrupção 2017">
         <meta name="robots" content="index, follow">
@@ -13,7 +13,52 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="main-banner">
+            <img class="logo" src="{{ asset('img/logo.png') }}" alt="Quebra-Quebra" title="Quebra-Quebra" />
+        </div> <!--/#main-banner-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>QuebraQuebra REST API</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    {% block main %}{% endblock %}
+                </div> <!--/.col-8-->
+
+                <div class="col-md-4">
+                    <h3>Links Externos</h3>
+
+                    <dl>
+                        <dt>Website Oficial:</dt>
+                        <dd>
+                            <a href="http://quebraquebra.lsd.ufcg.edu.br" target="_blank">
+                                quebraquebra.lsd.ufcg.edu.br
+                            </a>
+                        </dd>
+                        <dt>GitHub:</dt>
+                        <dd>
+                            <a href="https://github.com/quebraquebra" target="_blank">
+                                github.com/quebraquebra
+                            </a>
+                        </dd>
+                        <dt>Facebook:</dt>
+                        <dd>
+                            <a href="https://www.facebook.com/quebracamaraquebrasenado" target="_blank">
+                                facebook.com/quebracamaraquebrasenado
+                            </a>
+                        </dd>
+                    </dl>
+                </div> <!--/.col-4-->
+            </div> <!--/.row-->
+
+            <footer>
+
+            </footer>
+        </div> <!--/.container-->
 
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>

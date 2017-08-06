@@ -4,6 +4,8 @@ body {
 
 a:hover { cursor: pointer }
 
+img { max-width: 100% }
+
 h1 {
   border-bottom: 3px solid #82d7b9;
   color:  #2c3e50;

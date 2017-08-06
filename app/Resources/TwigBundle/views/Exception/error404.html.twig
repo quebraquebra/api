@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erro 404{% endblock %}
+
+{% block main %}
+    <h3>Erro 404 - Página não encontrada</h3>
+
+    <div class="col-sm-6">
+        <h4><img src="{{ asset('img/erro404.png') }}" title="Erro 404"></h4>
+    </div> <!--/.col-->
+    <div class="col-sm-6">
+        <p>Possíveis motivos:</p>
+        <ul>
+            <li>O conteúdo não está mais no ar;</li>
+            <li>A página mudou de lugar;</li>
+            <li>Você digitou o endereço errado.</li>
+        </ul>
+        <p>Se você digitou o endereço (URL) manualmente, por favor verifique novamente a sintaxe do endereço.
+            Se você acredita ter encontrado um problema no servidor, entre em contato com o administrador.</p>
+        <p><a href="/" class="btn btn-primary">&laquo; Voltar à Página Inicial</a></p>
+    </div> <!--/.col-->
+{% endblock %}

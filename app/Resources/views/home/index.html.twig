@@ -1,336 +1,289 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <div id="main-banner">
-        <img class="logo" src="{{ asset('img/logo.png') }}" alt="Quebra-Quebra" title="Quebra-Quebra" />
-    </div> <!--/#main-banner-->
+{% block title %}Home{% endblock %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>QuebraQuebra REST API</h1>
+{% block main %}
+    <h3>Recursos disponíveis na API</h3>
+
+    <h4>Folha da Câmara dos Deputados</h4>
+    <p>
+        Recurso:
+        <a href="http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha" target="_blank">
+            api.quebraquebra.lsd.ufcg.edu.br/camara/folha
+        </a>
+    </p>
+    <p>
+        Dados em SQL (atualizados até 04/2017):
+        <a href="http://api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_camara.sql.zip" download>
+            api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_camara.sql.zip
+        </a>
+    </p>
+    <dl>
+        <dt>Dados retornados (formato JSON):</dt>
+        <dd>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Atributo</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">total</td>
+                            <td>
+                                Total de registros no banco de dados que atendem aos parâmetros da consulta.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">result</td>
+                            <td>
+                                Array de registros de folhas de pagamento.<br />
+                                Atributos da consulta:
+                                <ul>
+                                    <li><b>id</b></li>
+                                    <li><b>mes</b></li>
+                                    <li><b>ano</b></li>
+                                    <li><b>cargo</b></li>
+                                    <li><b>vinculo</b></li>
+                                    <li><b>servidor</b></li>
+                                    <li><b>remuneracaoFixa</b></li>
+                                    <li><b>vantagensPessoais</b></li>
+                                    <li><b>remuneracaoEventual</b></li>
+                                    <li><b>abonoPermanencia</b></li>
+                                    <li><b>descontos</b></li>
+                                    <li><b>outrosDiarias</b></li>
+                                    <li><b>outrosAuxilios</b></li>
+                                    <li><b>outrosVantagens</b></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> <!--/.table-responsive-->
+        </dd>
+
+        <dt>Parâmetros da consulta (via QueryString):</dt>
+        <dd>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Parâmetro</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">limit</td>
+                            <td>
+                                Limite de registros por página.<br />
+                                <u>Valor padrão</u>: <b>10</b>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">page</td>
+                            <td>
+                                Número da página de registros.<br />
+                                <u>Valor padrão</u>: <b>1</b>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">ano</td>
+                            <td>Ano da folha.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">mes</td>
+                            <td>Mês (valor numérico) da folha.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">servidor</td>
+                            <td>Nome do servidor.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">vinculo</td>
+                            <td>Vínculo do servidor junto à Câmara dos Deputados.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">cargo</td>
+                            <td>Cargo do servidor junto à Câmara dos Deputados.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">sort</td>
+                            <td>
+                                Atributo utilizado para ordenar os registros.<br />
+                                <u>Valor padrão</u>: <b>servidor</b>.<br />
+                                <u>Observação</u>: Se não forem informados <i>ano</i> e <i>mês</i>,
+                                além do valor de <i>sort</i>, a consulta também ordenará os registros por
+                                <b>ano</b> e <b>mês</b>, respectivamente.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">order</td>
+                            <td>
+                                Regra de ordenação dos registros.<br />
+                                <u>Valores possíveis</u>: <b>ASC</b> (ascendente) e <b>DESC</b> (decrescente)<br />
+                                <u>Valor padrão</u>: <b>ASC</b>.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
+            <p>
+                Exemplo de consulta com parâmetros:
+                <a href="http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc" target="_blank">
+                    api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc
+                </a>
+            </p>
+        </dd>
+    </dl>
 
-        <div class="row">
-            <div class="col-md-8">
-                <h3>Recursos disponíveis na API</h3>
+    <h4>Folha do Senado Federal</h4>
+    <p>
+        Recurso:
+        <a href="http://api.quebraquebra.lsd.ufcg.edu.br/senado/folha" target="_blank">
+            api.quebraquebra.lsd.ufcg.edu.br/senado/folha
+        </a>
+    </p>
+    <p>
+        Dados em SQL (atualizados até 06/2017):
+        <a href="http://api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_senado.sql.zip" download>
+            api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_senado.sql.zip
+        </a>
+    </p>
+    <dl>
+        <dt>Dados retornados (formato JSON):</dt>
+        <dd>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Atributo</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">total</td>
+                            <td>
+                                Total de registros no banco de dados que atendem aos parâmetros da consulta.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">result</td>
+                            <td>
+                                Array de registros de folhas de pagamento.<br />
+                                Atributos da consulta:
+                                <ul>
+                                    <li><b>id</b></li>
+                                    <li><b>tipo</b></li>
+                                    <li><b>ano</b></li>
+                                    <li><b>mes</b></li>
+                                    <li><b>servidor</b></li>
+                                    <li><b>anoAdmissao</b></li>
+                                    <li><b>vinculo</b></li>
+                                    <li><b>cargo</b></li>
+                                    <li><b>padrao</b></li>
+                                    <li><b>especialidade</b></li>
+                                    <li><b>situacao</b></li>
+                                    <li><b>remuneracaoBasica</b></li>
+                                    <li><b>vantagensPessoais</b></li>
+                                    <li><b>funcaoCargoComissao</b></li>
+                                    <li><b>gratificacaoNatalina</b></li>
+                                    <li><b>horasExtras</b></li>
+                                    <li><b>outrasRemuneracoesEventuais</b></li>
+                                    <li><b>adicionalPericulosidade</b></li>
+                                    <li><b>adicionalNoturno</b></li>
+                                    <li><b>abonoPermanencia</b></li>
+                                    <li><b>reversaoTetoConstitucional</b></li>
+                                    <li><b>impostoRenda</b></li>
+                                    <li><b>psss</b></li>
+                                    <li><b>faltas</b></li>
+                                    <li><b>diarias</b></li>
+                                    <li><b>auxilioAlimentacao</b></li>
+                                    <li><b>outrasVantagensIndenizatorias</b></li>
+                                    <li><b>licencaPremio</b></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> <!--/.table-responsive-->
+        </dd>
 
-                <h4>Folha da Câmara dos Deputados</h4>
-                <p>
-                    Recurso:
-                    <a href="http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha" target="_blank">
-                        api.quebraquebra.lsd.ufcg.edu.br/camara/folha
-                    </a>
-                </p>
-                <p>
-                    Dados em SQL (atualizados até 04/2017):
-                    <a href="http://api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_camara.sql.zip" download>
-                        api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_camara.sql.zip
-                    </a>
-                </p>
-                <dl>
-                    <dt>Dados retornados (formato JSON):</dt>
-                    <dd>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Atributo</th>
-                                        <th>Descrição</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-bold">total</td>
-                                        <td>
-                                            Total de registros no banco de dados que atendem aos parâmetros da consulta.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">result</td>
-                                        <td>
-                                            Array de registros de folhas de pagamento.<br />
-                                            Atributos da consulta:
-                                            <ul>
-                                                <li><b>id</b></li>
-                                                <li><b>mes</b></li>
-                                                <li><b>ano</b></li>
-                                                <li><b>cargo</b></li>
-                                                <li><b>vinculo</b></li>
-                                                <li><b>servidor</b></li>
-                                                <li><b>remuneracaoFixa</b></li>
-                                                <li><b>vantagensPessoais</b></li>
-                                                <li><b>remuneracaoEventual</b></li>
-                                                <li><b>abonoPermanencia</b></li>
-                                                <li><b>descontos</b></li>
-                                                <li><b>outrosDiarias</b></li>
-                                                <li><b>outrosAuxilios</b></li>
-                                                <li><b>outrosVantagens</b></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> <!--/.table-responsive-->
-                    </dd>
-
-                    <dt>Parâmetros da consulta (via QueryString):</dt>
-                    <dd>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Parâmetro</th>
-                                        <th>Descrição</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-bold">limit</td>
-                                        <td>
-                                            Limite de registros por página.<br />
-                                            <u>Valor padrão</u>: <b>10</b>.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">page</td>
-                                        <td>
-                                            Número da página de registros.<br />
-                                            <u>Valor padrão</u>: <b>1</b>.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">ano</td>
-                                        <td>Ano da folha.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">mes</td>
-                                        <td>Mês (valor numérico) da folha.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">servidor</td>
-                                        <td>Nome do servidor.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">vinculo</td>
-                                        <td>Vínculo do servidor junto à Câmara dos Deputados.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">cargo</td>
-                                        <td>Cargo do servidor junto à Câmara dos Deputados.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">sort</td>
-                                        <td>
-                                            Atributo utilizado para ordenar os registros.<br />
-                                            <u>Valor padrão</u>: <b>servidor</b>.<br />
-                                            <u>Observação</u>: Se não forem informados <i>ano</i> e <i>mês</i>,
-                                            além do valor de <i>sort</i>, a consulta também ordenará os registros por
-                                            <b>ano</b> e <b>mês</b>, respectivamente.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">order</td>
-                                        <td>
-                                            Regra de ordenação dos registros.<br />
-                                            <u>Valores possíveis</u>: <b>ASC</b> (ascendente) e <b>DESC</b> (decrescente)<br />
-                                            <u>Valor padrão</u>: <b>ASC</b>.
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <p>
-                            Exemplo de consulta com parâmetros:
-                            <a href="http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc" target="_blank">
-                                api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc
-                            </a>
-                        </p>
-                    </dd>
-                </dl>
-
-                <h4>Folha do Senado Federal</h4>
-                <p>
-                    Recurso:
-                    <a href="http://api.quebraquebra.lsd.ufcg.edu.br/senado/folha" target="_blank">
-                        api.quebraquebra.lsd.ufcg.edu.br/senado/folha
-                    </a>
-                </p>
-                <p>
-                    Dados em SQL (atualizados até 06/2017):
-                    <a href="http://api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_senado.sql.zip" download>
-                        api.quebraquebra.lsd.ufcg.edu.br/downloads/folha_senado.sql.zip
-                    </a>
-                </p>
-                <dl>
-                    <dt>Dados retornados (formato JSON):</dt>
-                    <dd>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Atributo</th>
-                                        <th>Descrição</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-bold">total</td>
-                                        <td>
-                                            Total de registros no banco de dados que atendem aos parâmetros da consulta.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">result</td>
-                                        <td>
-                                            Array de registros de folhas de pagamento.<br />
-                                            Atributos da consulta:
-                                            <ul>
-                                                <li><b>id</b></li>
-                                                <li><b>tipo</b></li>
-                                                <li><b>ano</b></li>
-                                                <li><b>mes</b></li>
-                                                <li><b>servidor</b></li>
-                                                <li><b>anoAdmissao</b></li>
-                                                <li><b>vinculo</b></li>
-                                                <li><b>cargo</b></li>
-                                                <li><b>padrao</b></li>
-                                                <li><b>especialidade</b></li>
-                                                <li><b>situacao</b></li>
-                                                <li><b>remuneracaoBasica</b></li>
-                                                <li><b>vantagensPessoais</b></li>
-                                                <li><b>funcaoCargoComissao</b></li>
-                                                <li><b>gratificacaoNatalina</b></li>
-                                                <li><b>horasExtras</b></li>
-                                                <li><b>outrasRemuneracoesEventuais</b></li>
-                                                <li><b>adicionalPericulosidade</b></li>
-                                                <li><b>adicionalNoturno</b></li>
-                                                <li><b>abonoPermanencia</b></li>
-                                                <li><b>reversaoTetoConstitucional</b></li>
-                                                <li><b>impostoRenda</b></li>
-                                                <li><b>psss</b></li>
-                                                <li><b>faltas</b></li>
-                                                <li><b>diarias</b></li>
-                                                <li><b>auxilioAlimentacao</b></li>
-                                                <li><b>outrasVantagensIndenizatorias</b></li>
-                                                <li><b>licencaPremio</b></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> <!--/.table-responsive-->
-                    </dd>
-
-                    <dt>Parâmetros da consulta (via QueryString):</dt>
-                    <dd>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Parâmetro</th>
-                                        <th>Descrição</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-bold">limit</td>
-                                        <td>
-                                            Limite de registros por página.<br />
-                                            <u>Valor padrão</u>: <b>10</b>.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">page</td>
-                                        <td>
-                                            Número da página de registros.<br />
-                                            <u>Valor padrão</u>: <b>1</b>.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">ano</td>
-                                        <td>Ano da folha.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">mes</td>
-                                        <td>Mês (valor numérico) da folha.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">servidor</td>
-                                        <td>Nome do servidor.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">vinculo</td>
-                                        <td>Vínculo do servidor junto ao Senado Federal.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">cargo</td>
-                                        <td>Cargo do servidor junto ao Senado Federal.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">sort</td>
-                                        <td>
-                                            Atributo utilizado para ordenar os registros.<br />
-                                            <u>Valor padrão</u>: <b>servidor</b>.<br />
-                                            <u>Observação</u>: Se não forem informados <i>ano</i> e <i>mês</i>,
-                                            além do valor de <i>sort</i>, a consulta também ordenará os registros por
-                                            <b>ano</b> e <b>mês</b>, respectivamente.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">order</td>
-                                        <td>
-                                            Regra de ordenação dos registros.<br />
-                                            <u>Valores possíveis</u>: <b>ASC</b> (ascendente) e <b>DESC</b> (decrescente)<br />
-                                            <u>Valor padrão</u>: <b>ASC</b>.
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <p>
-                            Exemplo de consulta com parâmetros:
-                            <a href="http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc" target="_blank">
-                                api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc
-                            </a>
-                        </p>
-                    </dd>
-                </dl>
-            </div> <!--/.col-8-->
-
-            <div class="col-md-4">
-                <h3>Links Externos</h3>
-
-                <dl>
-                    <dt>Website Oficial:</dt>
-                    <dd>
-                        <a href="http://quebraquebra.lsd.ufcg.edu.br" target="_blank">
-                            quebraquebra.lsd.ufcg.edu.br
-                        </a>
-                    </dd>
-                    <dt>GitHub:</dt>
-                    <dd>
-                        <a href="https://github.com/quebraquebra" target="_blank">
-                            github.com/quebraquebra
-                        </a>
-                    </dd>
-                    <dt>Facebook:</dt>
-                    <dd>
-                        <a href="https://www.facebook.com/quebracamaraquebrasenado" target="_blank">
-                            facebook.com/quebracamaraquebrasenado
-                        </a>
-                    </dd>
-                </dl>
-            </div> <!--/.col-4-->
-        </div>
-
-        <footer>
-            
-        </footer>
-    </div> <!--/.container-->
-{% endblock %}
-
-{% block stylesheets %}
-
+        <dt>Parâmetros da consulta (via QueryString):</dt>
+        <dd>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Parâmetro</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">limit</td>
+                            <td>
+                                Limite de registros por página.<br />
+                                <u>Valor padrão</u>: <b>10</b>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">page</td>
+                            <td>
+                                Número da página de registros.<br />
+                                <u>Valor padrão</u>: <b>1</b>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">ano</td>
+                            <td>Ano da folha.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">mes</td>
+                            <td>Mês (valor numérico) da folha.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">servidor</td>
+                            <td>Nome do servidor.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">vinculo</td>
+                            <td>Vínculo do servidor junto ao Senado Federal.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">cargo</td>
+                            <td>Cargo do servidor junto ao Senado Federal.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">sort</td>
+                            <td>
+                                Atributo utilizado para ordenar os registros.<br />
+                                <u>Valor padrão</u>: <b>servidor</b>.<br />
+                                <u>Observação</u>: Se não forem informados <i>ano</i> e <i>mês</i>,
+                                além do valor de <i>sort</i>, a consulta também ordenará os registros por
+                                <b>ano</b> e <b>mês</b>, respectivamente.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">order</td>
+                            <td>
+                                Regra de ordenação dos registros.<br />
+                                <u>Valores possíveis</u>: <b>ASC</b> (ascendente) e <b>DESC</b> (decrescente)<br />
+                                <u>Valor padrão</u>: <b>ASC</b>.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                Exemplo de consulta com parâmetros:
+                <a href="http://api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc" target="_blank">
+                    api.quebraquebra.lsd.ufcg.edu.br/camara/folha?limit=10&page=1&ano=2017&mes=1&servidor=jose&vinculo=&cargo=&sort=servidor&order=desc
+                </a>
+            </p>
+        </dd>
+    </dl>
 {% endblock %}
