@@ -26,7 +26,7 @@ class CamaraController extends FOSRestController
     public function folhaAction(Request $request): Response
     {
         try {
-            $filters = $request->query->getIterator()->getArrayCopy();
+            $filters = $request->query->all();
 
             /** @var FolhaCamaraService $folhaCamaraService */
             $folhaCamaraService = $this->get('app.folha.camara.service');

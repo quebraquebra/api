@@ -23,7 +23,7 @@ class SenadoController extends FOSRestController
     public function folhaAction(Request $request): Response
     {
         try {
-            $filters = $request->query->getIterator()->getArrayCopy();
+            $filters = $request->query->all();
 
             /** @var FolhaSenadoService $folhaSenadoService */
             $folhaSenadoService = $this->get('app.folha.senado.service');
