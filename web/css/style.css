@@ -1,3 +1,7 @@
+body {
+  word-wrap: break-word;
+}
+
 a:hover { cursor: pointer }
 
 h1 {
